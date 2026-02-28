@@ -25,8 +25,8 @@ Plateforme de validation collaborative du corpus parallèle breton–français.
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Installer les dépendances
-pip install -r backend/requirements.txt
+# Installer le projet en mode développement
+pip install -e .
 ```
 
 ### 2. Frontend (Vue 3 / Vite / Tailwind CSS)
@@ -73,6 +73,31 @@ Tout est servi sur `http://localhost:8000` — API et interface.
 
 ---
 
+## Import de corpus
+
+Importer un fichier JSONL dans la table `segments` :
+
+```bash
+source .venv/bin/activate
+python scripts/import_corpus.py data/arbres-kenstur.jsonl
+```
+
+Le nom de la source est déduit du fichier (`arbres-kenstur`), ou peut être précisé avec `--source "mon_corpus"`.
+
+Format JSONL attendu (un objet par ligne) :
+
+```json
+{"translation": {"br": "Demat", "fr": "Bonjour"}}
+```
+
+Pour réimporter un corpus (supprime puis réinsère les segments de cette source) :
+
+```bash
+python scripts/import_corpus.py data/arbres-kenstur.jsonl --replace
+```
+
+---
+
 ## Structure du projet
 
 ```
@@ -92,7 +117,10 @@ brezhoneg-validation/
 │   ├── index.html
 │   ├── package.json
 │   └── vite.config.js
+├── scripts/                 # Scripts utilitaires
+│   └── import_corpus.py     # Import JSONL → table segments
 ├── data/                    # Données & base SQLite (gitignored)
+├── pyproject.toml           # Configuration projet Python
 ├── .gitignore
 ├── LICENSE
 ├── PRD.md

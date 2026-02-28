@@ -1,0 +1,17 @@
+[project]
+name = "brezhoneg-validation"
+version = "0.1.0"
+description = "Plateforme de validation collaborative du corpus parallèle breton–français"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.34,<1",
+    "sqlalchemy>=2,<3",
+]
+
+[tool.setuptools.packages.find]
+include = ["backend*", "scripts*"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
