@@ -82,6 +82,22 @@ source .venv/bin/activate
 python scripts/import_corpus.py data/arbres-kenstur.jsonl
 ```
 
+```bash
+sqlite3 data/brezhoneg.db
+SQLite version 3.45.1 2024-01-30 16:01:20
+Enter ".help" for usage hints.
+sqlite> SELECT * FROM segments;
+1|"Alo, amañ Lizig ! A, Mari, te an hini eo ?"|"Allo, ici Lizig ! Ah, Marie, c'est toi ?"|arbres-kenstur|2026-03-03 07:46:36.159307
+2|"Amiguito", ha n'oc'h eus ket lavaret din ne vezoc'h gant ho servij en iliz nemet e-pad ur sizhunvezh ?|Amiguito, ne m'avez-vous pas dit que vous serez de service à l'église pendant seulement une semaine ?|arbres-kenstur|2026-03-03 07:46:36.159312
+3|"Emañ lipet ganti he loa!" eme Brimel neuze.|Brimel dit alors "Elle est morte !"|arbres-kenstur|2026-03-03 07:46:36.159313
+
+sqlite> SELECT * FROM segments WHERE francais LIKE '%demain%';
+178|A-benn arhoaz d'an eur-mañ e vint o labourad da vad.|Demain à cette heure-ci, ils seront en plein travail.|arbres-kenstur|2026-03-03 07:46:36.159429
+474|An den a zo hirio; warc'hoazh n'ema mui !|L'homme existe aujourd'hui, demain il ne sera plus !|arbres-kenstur|2026-03-03 07:46:36.159653
+476|An dervez war-lerc'h, houman a gane war ar reier, penfollet.|Le lendemain, elle chantait sur les rochers, égarée.|arbres-kenstur|2026-03-03 07:46:36.159654
+```
+
+
 Le nom de la source est déduit du fichier (`arbres-kenstur`), ou peut être précisé avec `--source "mon_corpus"`.
 
 Format JSONL attendu (un objet par ligne) :
